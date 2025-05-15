@@ -72,8 +72,6 @@
 - Common in relational/document databases but historically avoided in key-value stores due to complexity (though some like Riak now support them).
 - Essential for search engines like Elasticsearch/Solr.
 
----
-
 ### **2. Two Approaches to Partition Secondary Indexes**
 
 ### **A. Document-Partitioned Indexes (Local Indexes)**
@@ -108,8 +106,6 @@
 
 ![C6_image4.png](../images/c6/image4.png)
 
----
-
 ### **3. Tradeoffs: Local vs. Global Indexes**
 
 | **Aspect** | **Document-Partitioned (Local)** | **Term-Partitioned (Global)** |
@@ -118,8 +114,6 @@
 | **Read Scalability** | Scatter/gather is expensive | Direct lookup is efficient |
 | **Consistency** | Easier to keep in sync | Often async (eventually consistent) |
 | **Use Cases** | Simple writes, tolerate slow reads | Read-heavy workloads |
-
----
 
 ### **4. Implementation Notes**
 
@@ -131,16 +125,12 @@
 - **Hybrid approaches**:
     - Some systems allow mixing both (e.g., Oracle lets you choose per-index).
 
----
-
 ### **5. Future Considerations**
 
 - **Conflict resolution**: Asynchronous global indexes may return stale data during failures.
 - **Advanced techniques**:
     - **Materialized views** (pre-computed query results) can optimize multi-index queries.
     - **Partitioning by query patterns** (e.g., time-series data) may avoid scatter/gather.
-
----
 
 ## **Rebalancing Partitions**
 
@@ -157,8 +147,6 @@
 ✔ Maintain availability during rebalancing.
 
 ✔ Minimize data movement (reduce network/disk I/O).
-
----
 
 ### **2. Rebalancing Strategies**
 
@@ -200,8 +188,6 @@
 - **Cons**:
     - Random splits can be unfair (but averages out with many partitions).
 
----
-
 ### **3. Rebalancing Operations: Automatic vs. Manual**
 
 | **Approach** | **Pros** | **Cons** | **Examples** |
@@ -214,8 +200,6 @@
 
 - **Automation** is convenient but risky (e.g., misinterpreting slow nodes as dead).
 - **Human oversight** reduces surprises but slows rebalancing.
-
----
 
 ### **4. Practical Considerations**
 
@@ -254,8 +238,6 @@ When data is partitioned across multiple nodes, clients need a way to determine:
 
 This is a **service discovery** challenge common to distributed systems.
 
----
-
 ### **2. Three Routing Approaches**
 
 | **Approach** | **How It Works** | **Pros & Cons** | **Examples** |
@@ -266,8 +248,6 @@ This is a **service discovery** challenge common to distributed systems.
 |  |  |  |  |
 
 ![C6_image6.png](../images/c6/image6.png)
-
----
 
 ### **3. How Routing Tiers Track Partition Assignments**
 
@@ -291,15 +271,11 @@ To stay updated on partition/node mappings, systems use:
 
 - **Couchbase** relies on static routing (no auto-rebalancing) + a routing tier (`moxi`).
 
----
-
 ### **4. Bootstrapping Client Connections**
 
 - **Initial IP Discovery**:
     - **DNS**: For slow-changing node IPs (e.g., routing tier endpoints).
     - **Seed Nodes**: Clients connect to a known list of seed nodes (e.g., Cassandra).
-
----
 
 ### **5. Key Challenges**
 
@@ -308,8 +284,6 @@ To stay updated on partition/node mappings, systems use:
 - **Latency vs. Complexity**:
     - Direct client routing is fastest but requires clients to handle partition changes.
     - Routing tiers simplify clients but add a hop.
-
----
 
 ### **Summary**
 
@@ -345,8 +319,6 @@ Most NoSQL databases support only simple operations:
 
 ✔ Optimized for **analytical workloads** (OLAP).
 
----
-
 ### **2. How MPP Databases Execute Queries in Parallel**
 
 ### **A. Query Optimization & Partitioning**
@@ -372,8 +344,6 @@ Most NoSQL databases support only simple operations:
 - **Checkpointing**: Save intermediate results to recover from failures.
 - **Speculative execution**: Restart slow tasks on other nodes.
 
----
-
 ### **3. Why Parallel Execution Matters**
 
 - **Performance**:
@@ -382,8 +352,6 @@ Most NoSQL databases support only simple operations:
 - **Scalability**:
     - Add nodes to handle larger datasets/complex queries.
 
----
-
 ### **4. Comparison: NoSQL vs. MPP**
 
 | **Feature** | **NoSQL (e.g., Cassandra, MongoDB)** | **MPP (e.g., Snowflake, Redshift)** |
@@ -391,8 +359,6 @@ Most NoSQL databases support only simple operations:
 | **Query Complexity** | Simple (key-based, scatter/gather). | Complex (joins, aggregations, subqueries). |
 | **Execution Model** | Single-node or simple parallel scans. | Multi-stage, partitioned execution. |
 | **Use Case** | OLTP (low-latency reads/writes). | OLAP (analytics, batch processing). |
-
----
 
 ### **5. Challenges**
 
@@ -427,8 +393,6 @@ Most NoSQL databases support only simple operations:
 - **Scalability**: Single machines can't handle massive datasets.
 - **Load Balancing**: Distributes data and queries evenly to avoid **hotspots**.
 
----
-
 ### **2. Partitioning Strategies**
 
 | **Approach** | **How It Works** | **Pros** | **Cons** |
@@ -437,16 +401,12 @@ Most NoSQL databases support only simple operations:
 | **Hash Partitioning** | - Hash function maps keys to partitions (e.g., `hash(key) mod N`).- Fixed or dynamic partitions. | ✔ Even data distribution.✔ Predictable performance. | ❌ Range queries require scatter/gather. |
 | **Hybrid Approaches** | - Combine both (e.g., partition by hash, then sort by timestamp). | ✔ Balances even distribution and query efficiency. | ❌ Increased complexity. |
 
----
-
 ### **3. Secondary Index Partitioning**
 
 | **Type** | **How It Works** | **Pros** | **Cons** |
 | --- | --- | --- | --- |
 | **Document-Partitioned (Local)** | Secondary indexes are stored with primary data in each partition. | ✔ Fast writes (single partition). | ❌ Slow reads (scatter/gather). |
 | **Term-Partitioned (Global)** | Secondary indexes are split by term (e.g., `color:red` lives on one partition). | ✔ Fast reads (single partition lookup). | ❌ Slow writes (multiple index updates). |
-
----
 
 ### **4. Rebalancing & Routing**
 
@@ -459,8 +419,6 @@ Most NoSQL databases support only simple operations:
     - **Routing tier**: Centralized proxy (e.g., MongoDB’s `mongos`).
     - **Client-direct**: Complex but low-latency (requires partition awareness).
 
----
-
 ### **5. Challenges & Tradeoffs**
 
 - **Consistency**: Cross-partition operations risk partial failures (e.g., write to Partition 1 succeeds, Partition 2 fails).
@@ -468,8 +426,6 @@ Most NoSQL databases support only simple operations:
     - **Key-range partitioning**: Fast ranges but uneven load.
     - **Hash partitioning**: Even load but slow ranges.
 - **Complexity**: Hybrid approaches and global indexes add operational overhead.
-
----
 
 ### **Key Takeaways**
 
