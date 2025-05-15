@@ -302,9 +302,7 @@ Some systems are **elastic**, automatically adding resources when load increases
 While distributing stateless services across multiple machines is fairly straightforward, taking stateful data systems from a single node to a distributed setup can introduce a lot of additional complexity. For this reason, common wisdom until recently was to keep your database on a single node (scale up) until scaling cost or high-availability requirements forced you to make it distributed.
 
 <aside>
-🚨
-
-### **Explaining it better**
+🚨 ### **Explaining it better**
 
 **Stateless Services:**
 
