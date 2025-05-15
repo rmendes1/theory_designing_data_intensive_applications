@@ -44,7 +44,7 @@ Replication principles, rooted in 1970s research, remain relevant. Despite recen
     2. **Network Filesystems and Replicated Block Devices**:
         - DRBD.
 
-![image.png](attachment:1da9f2ae-fba0-4cad-bc0f-763d743c75e6:image.png)
+![c5_image1.png](../images/c5/image1.png)
 
 ### **Synchronous Versus Asynchronous Replication**:
 
@@ -77,7 +77,7 @@ Replication principles, rooted in 1970s research, remain relevant. Despite recen
     1. **Chain Replication**: A synchronous replication variant used in systems like Microsoft Azure Storage.
     2. **Consistency and Consensus**: Strong theoretical connections exist between replication consistency and consensus algorithms, explored further in later chapters.
 
-![image.png](attachment:f902948c-5e23-43cf-ae92-6344096f2d67:image.png)
+![c5_image2.png](../images/c5/image2.png)
 
 ### **Setting Up New Followers**:
 
@@ -263,7 +263,7 @@ Replication principles, rooted in 1970s research, remain relevant. Despite recen
     - Extends leader-based replication by allowing multiple nodes (leaders) to accept writes.
     - Each leader forwards writes to other leaders, acting as both a leader and a follower.
     
-    ![image.png](attachment:91e02b08-4eb0-4735-be4d-eafe4b1cea30:image.png)
+    ![c5_image3.png](../images/c5/image3.png)
 
 ### **Use Cases for Multi-Leader Replication**:
 
@@ -318,8 +318,7 @@ Replication principles, rooted in 1970s research, remain relevant. Despite recen
     - Write conflicts occur when the same data is modified concurrently on different leaders, requiring conflict resolution.
     - Example: Two users editing the same wiki page title simultaneously, resulting in conflicting updates.
     
-    ![image.png](attachment:18f1c5e6-cc9f-439c-9b0f-898fe6f40847:image.png)
-    
+    ![c5_image5.png](../images/c5/image5.png)    
 ### **Conflict Detection**:
 
 - **Single-Leader vs. Multi-Leader**:
@@ -392,7 +391,7 @@ Replication principles, rooted in 1970s research, remain relevant. Despite recen
 - Circular and star topologies are simpler but vulnerable to single points of failure.
 - Proper conflict detection and causality handling (e.g., version vectors) are critical for maintaining consistency.
 
-![image.png](attachment:8f6633f6-960d-4733-bc94-55516c841635:image.png)
+![c5_image6.png](../images/c5/image6.png)
 
 ### **Types of Topologies**:
 
@@ -435,7 +434,7 @@ Replication principles, rooted in 1970s research, remain relevant. Despite recen
 
 ### **Challenges in Topologies**:
 
-![image.png](attachment:22737738-b3b7-4d61-8c29-1fb08bc760cf:image.png)
+![c5_image7.png](../images/c5/image7.png)
 
 #### **1. Replication Loops**:
 
@@ -479,7 +478,7 @@ Replication principles, rooted in 1970s research, remain relevant. Despite recen
 - **Solution**:
     - Clients read from multiple replicas in parallel and use version numbers to determine the most recent value.
     
-    ![image.png](attachment:7b91f070-c872-4bd7-87c6-9c45c7943d53:image.png)
+    ![c5_image8.png](../images/c5/image8.png)
 
 ### **Replication Repair Mechanisms**:
 
