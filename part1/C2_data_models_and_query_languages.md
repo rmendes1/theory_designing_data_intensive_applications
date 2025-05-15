@@ -110,7 +110,7 @@ As applications grow, data often becomes more interconnected, leading to challen
 
 - **Entity References:** Organizations and schools, initially stored as strings, might later link to entities with additional data (e.g., logos, web pages).
 
-![c2_image2.png](../images/c2/image1.png)
+![c2_image1.png](../images/c2/image1.png)
 
 - **Recommendations:** Adding features like recommendations between users introduces many-to-many relationships. For instance:
     - A recommendation links to the author and updates dynamically with changes, such as a new photo.
@@ -356,7 +356,7 @@ Graph data models are ideal for representing data with complex, many-to-many rel
 - Homogeneous graphs (e.g., only people or web pages).
 - Heterogeneous graphs (e.g., Facebook's graph combining people, locations, events, and interactions).
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/aeacb778-025c-45f1-8720-8d3f0c5a108f/c18d6647-e181-4383-8502-1f6e55c82189/image.png)
+![c2_image2.png](../images/c2/image2.png)
 
 **Graph Models:**
 
