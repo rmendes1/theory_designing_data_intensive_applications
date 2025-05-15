@@ -304,7 +304,7 @@ While distributing stateless services across multiple machines is fairly straigh
 <aside>
 🚨 
 
-### **Explaining it better**
+### Explaining it better
 
 **Stateless Services:**
 
