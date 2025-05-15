@@ -249,7 +249,7 @@ This process ensures that the B-tree remains balanced after every update, mainta
 - Data warehouses are common in large organizations, so it becomes a challenge how to optimize queries against fact tables with billions or trillions of rows
 - Taking advantage of the fact that typically each analytic query only needs a small number of the many columns in a fact table, you can reduce reads by physically storing chunks of column data together, instead of physically storing chunks of records (rows)
 
-![c3_img1.png](../images/c3/img1.png)
+![c3_img1.png](../images/c3/image1.png)
 
 - Columns from the same fact table must all store the rows in the same order
 
